@@ -2,10 +2,13 @@ package hello.hellospring.service;
 
 import domain.Member;
 import hello.hellospring.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
     // Ctrl + Shift + t
     // test 자동 생성
@@ -13,7 +16,7 @@ public class MemberService {
 
     // 새로운 인스턴스를 계속 만들지 않도록
     // 외부에서 주입받는 느낌이다.
-    // 이것이 DI !!!!
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

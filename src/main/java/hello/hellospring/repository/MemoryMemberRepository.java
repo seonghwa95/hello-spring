@@ -1,9 +1,11 @@
 package hello.hellospring.repository;
 
 import domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
     // 실무에서는 이런식으로 공유되는 변수를 저장할 때
     // 동시성 문제가 있을 수 있기 때문에 concurrentHashMap을 사용해야 한다.
