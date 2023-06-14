@@ -1,6 +1,6 @@
 package hello.hellospring.service;
 
-import domain.Member;
+import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class MemberService {
     /**
      * 회원 가입
      */
-    public Long join(domain.Member member) {
+    public Long join(Member member) {
         // 같은 이름이 있는 중복 회원 불가
         // Optional -> null일 가능성이 있는 것들은 웬만하면 감싸서
         // 이용하는 요즘 추세!
