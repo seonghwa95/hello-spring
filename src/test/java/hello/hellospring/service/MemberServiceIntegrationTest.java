@@ -1,34 +1,28 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * 단위 테스트 방식 (주로 좋은 테스트일 확률이 높아서 이 방식으로 연습하는 것이 좋다)
+ * 통합 테스트 방식 (spring도 띄우고 DB도 점검)
+ * 통합도 필요하나 단위 테스트를 주로 연습할 것을 권장하심.
  */
-class MemberServiceTest {
+@SpringBootTest
+@Transactional // test후에 rollback을 해줌으로써 db에 남지 않아 같은 테스트를 똑같이 하는게 가능하다(ex. 회원가입)
+class MemberServiceIntegrationTest {
+    @Autowired
     MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    // 독립적인 환경에서 테스트를 진행하기 위해서
-    // 각각의 메서드 전에 실행되는 메서드
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    // 각각의 메서드 후에 실행되는 메서드
-    @AfterEach
-    public void afterEach() {memberRepository.clearStore();}
-    // 메모리 클리어 역할
-
+    @Autowired
+    MemberRepository memberRepository;
 
     // Test는 직관적일 수 있도록
     // 과감하게! 한글로 메서드 이름을 작성한다.
@@ -39,7 +33,7 @@ class MemberServiceTest {
 
         //  given ( 무언가 주어짐 )
         Member member = new Member();
-        member.setName("spring");
+        member.setName("spring1");
 
         // when ( 이것을 실행했을 때 )
         Long saveId = memberService.join(member);

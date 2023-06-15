@@ -1,6 +1,6 @@
 package hello.hellospring.repository;
 
-import domain.Member;
+import hello.hellospring.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class MemoryMemberRepositoryTest {
     // 의존 관게가 없도록 설계가 되어야 한다. (저장소 혹은 데이터가 테스트가 끝날 때마다 날아가도록 설정하자)
     @Test
     public void save() {
-        domain.Member member = new Member();
+        Member member = new Member();
         member.setName("spring");
 
         repository.save(member);
