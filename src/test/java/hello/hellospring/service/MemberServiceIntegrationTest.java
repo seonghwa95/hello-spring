@@ -59,7 +59,7 @@ class MemberServiceIntegrationTest {
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
         // 예외처리가 잘 돌아가는지 확인은 가능
-        // 하지만 더 좋은 문법을 따로 제공한다.
+        // 하지만 더 좋은 문법을 따로 제공한다.!
 //        try {
 //            memberService.join(member2);
 //            fail();
