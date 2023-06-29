@@ -4,10 +4,13 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+// DATA를 저장하거나 변경할때는 항상 transaction이 필요함 (JPA)
+@Transactional
 public class MemberService {
     // Ctrl + Shift + t
     // test 자동 생성

@@ -1,11 +1,14 @@
 package hello.hellospring;
 
 import hello.hellospring.repository.JdbcTemplateMemberRepository;
+import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 // 실무에서는 주로 정형화된 컨트롤러, 서비스, 리포지토리 같은 코드는 컴포넌트 스캔 방식(@Service, @Repository @Autowired 방식)을 사용한다.
@@ -14,10 +17,11 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+    private EntityManager em;
 
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    @Autowired
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     @Bean
@@ -33,7 +37,11 @@ public class SpringConfig {
         // 순수JDBC 방식
 //        return new JdbcMemberRepository(dataSource);
 
-        return new JdbcTemplateMemberRepository(dataSource);
+        // JDBC Template 방식
+//        return new JdbcTemplateMemberRepository(dataSource);
+
+        // JPA
+        return new JpaMemberRepository(em);
     }
 
 }
